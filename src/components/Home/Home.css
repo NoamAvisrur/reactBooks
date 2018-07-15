@@ -1,0 +1,9 @@
+.home-wrapper{
+    height: calc(100vh - 100px);
+    background-color: #eee;
+}
+
+.books-wrapper{
+    padding: 1rem;
+    display: flex;
+}

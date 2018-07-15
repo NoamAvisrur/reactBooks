@@ -1,0 +1,55 @@
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 1px 1px 4px 1px #0000008a;
+}
+
+.App-header-details{
+    display: flex;
+    align-items: center;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.header-button{
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    color: white;
+    background-color: transparent;
+    margin-left: 2rem;
+}
+
+.header-button:hover{
+    background-color: yellowgreen;
+    color: #222222;
+    border: 2px solid #bbb;
+    cursor: pointer;
+}
+
+.books-amount{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #69abdf80;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
