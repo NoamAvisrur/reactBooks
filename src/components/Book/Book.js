@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'react-bootstrap';
 
 const book = (props) => {
 
@@ -9,7 +8,7 @@ const book = (props) => {
             <img className="book-img" src={props.img} alt="books img"/>
             <span>{props.author}</span>
             <span>{props.date}</span>
-            <button onClick={props.deleteBook}>Delete</button>
+            <button onClick={() => props.deleteBook(props.id)}>Delete</button>
             <button onClick={props.editBook}>Edit</button>
     </div>
 }

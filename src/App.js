@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter, Route} from 'react-router-dom'
+import { BrowserRouter, Route, Redirect} from 'react-router-dom'
 import './App.css';
 import Header from './components/Header/Header';
 import './components/Header/Header.css'
@@ -81,6 +81,8 @@ class App extends Component {
               );
             }}/>
             <Route path="/about" exact render={() => <About about={this.state.about}/>} />
+            <Redirect from="/" to="/home" />*/
+            <Route render={() => <h1>Not Found</h1>} />
           </div>
         </BrowserRouter>
       </div>
