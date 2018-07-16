@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-class myModal extends Component {
+class deleteModal extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -23,4 +23,4 @@ class myModal extends Component {
 
 }
 
-export default myModal;
+export default deleteModal;

@@ -8,8 +8,8 @@ const book = (props) => {
             <img className="book-img" src={props.img} alt="books img"/>
             <span>{props.author}</span>
             <span>{props.date}</span>
-            <button onClick={() => props.deleteBook(props.id)}>Delete</button>
-            <button onClick={props.editBook}>Edit</button>
+            <button onClick={() => props.deleteBook(props)}>Delete</button>
+            <button onClick={() => props.editBook(props)}>Edit</button>
     </div>
 }
 

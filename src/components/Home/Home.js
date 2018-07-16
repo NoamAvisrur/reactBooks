@@ -3,27 +3,33 @@ import PropTypes from 'prop-types';
 import Book from '../Book/Book';
 import '../Book/Book.css';
 import HomeDescription from '../HomeDescription/HomeDescription';
-import Modal from '../modals/modal'
+import DeleteModal from '../modals/DeleteModal'
+import EditModal from '../modals/EditModal'
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false,
-      selectedBookId: null
+      showDeleteModal: false,
+      showEditModal: false,
+      selectedBook: null
     }
   }
 
-  openModal = (bookId) => {
-    this.setState({showModal: true, selectedBookId: bookId});
+  openDeleteModal = (book) => {
+    this.setState({selectedBook: book, showDeleteModal: true});
+  }
+
+  openEditModal = (book) => {
+    this.setState({selectedBook: book, showEditModal: true});
   }
 
   closeModal = () => {
-    this.setState({showModal: false, selectedBookId: null});
+    this.setState({showDeleteModal: false, showEditModal: false, selectedBook: null});
   }
 
   deleteThisBook = () => {
-    this.props.deleteBook(this.state.selectedBookId);
+    this.props.deleteBook(this.state.selectedBook.id);
     this.closeModal();
   }
 
@@ -38,14 +44,20 @@ class Home extends Component {
                          author={this.props.cleanData(book.author)}
                          img={book.img}
                          date={book.date}
-                         editBook={() => this.openModal(book.id)}
-                         deleteBook={(bookId) => this.openModal(bookId)}/>
+                         editBook={() => this.openEditModal(book)}
+                         deleteBook={(book) => this.openDeleteModal(book)}/>
           })}
         </div>
         {this.props.showDescription ?
           <HomeDescription>this is a very long description about this book store app</HomeDescription> : null}
         <button onClick={this.props.hideDescription}>{this.props.showDescription ? 'Hide' : 'Show'}</button>
-        <Modal show={this.state.showModal} handleClose={() => this.closeModal()} deleteBook={() => this.deleteThisBook()}/>
+        <DeleteModal show={this.state.showDeleteModal}
+                     handleClose={() => this.closeModal()}
+                     deleteBook={() => this.deleteThisBook()}/>
+        <EditModal show={this.state.showEditModal}
+                   selectedBook={this.state.selectedBook}
+                   handleClose={() => this.closeModal()}
+                   deleteBook={() => this.deleteThisBook()}/>
       </div>
     );
   }
