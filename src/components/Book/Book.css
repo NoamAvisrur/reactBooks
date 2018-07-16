@@ -1,5 +1,5 @@
 .book{
-    width: 20%;
+    width: 23.5%;
     margin: 1rem;
     padding: 1rem;
     background-color: #69abdf80;
@@ -21,4 +21,10 @@
     border: 2px solid #222222;
     border-radius: 3px;
     margin: 0.5rem;
+}
+
+.book .book-img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
 }

@@ -19,6 +19,7 @@
 }
 
 .App-title {
+    margin: 0;
     font-size: 1.5em;
 }
 
@@ -28,6 +29,7 @@
     color: white;
     background-color: transparent;
     margin-left: 2rem;
+    text-decoration: none;
 }
 
 .header-button:hover{
@@ -35,6 +37,16 @@
     color: #222222;
     border: 2px solid #bbb;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.header-button:focus {
+    text-decoration: none;
+    color: white;
+}
+
+.active-route{
+    background-color: yellowgreen;
 }
 
 .books-amount{
