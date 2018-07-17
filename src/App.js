@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux'
-import * as actionTypes from './store/actions';
+import * as actionCreators from './store/actions';
 
 import './App.css';
 import Header from './components/Header/Header';
@@ -46,9 +46,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setBooks: (books) => dispatch({type: actionTypes.INIT_BOOKS, payload: books}),
-    setAbout: (about) => dispatch({type: actionTypes.INIT_ABOUT, payload: about}),
-    setUserName: (name) => dispatch({type: actionTypes.UPDATE_USER, payload: name})
+    setBooks: (books) => dispatch(actionCreators.initBooks(books)),
+    setAbout: (about) => dispatch(actionCreators.initAbout(about)),
+    setUserName: (user) => dispatch(actionCreators.updateUser(user))
   };
 };
 

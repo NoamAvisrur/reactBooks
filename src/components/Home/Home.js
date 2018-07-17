@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actionsTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions';
 
+import appHelper from '../../services/appHelper';
 import Book from '../Book/Book';
 import '../Book/Book.css';
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -57,11 +58,6 @@ class Home extends Component {
     this.setState({showDescription: descriptionShow});
   }
 
-  cleanData = (value) => { //clean string data from characters and capitalize them
-    let newValue = (value).replace(/[^\w\s]/gi, '');
-    return newValue.charAt(0).toUpperCase() + newValue.substr(1).toLowerCase();
-  }
-
   render() {
     return (
       <div className="home-wrapper">
@@ -69,8 +65,8 @@ class Home extends Component {
           {this.props.books.map((book, i) => {
             return <Book key={i}
                          id = {book.id}
-                         title={this.cleanData(book.title)}
-                         author={this.cleanData(book.author)}
+                         title={appHelper.cleanData(book.title)}
+                         author={appHelper.cleanData(book.author)}
                          img={book.img}
                          date={book.date}
                          editBook={() => this.openEditModal(book)}
@@ -99,8 +95,8 @@ Home.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSelectedBook: (id) => dispatch({type: actionsTypes.DELETE_BOOK, payload: id}),
-    editSelectedBook: (book) => dispatch({type: actionsTypes.UPDATE_BOOK, payload: book})
+    deleteSelectedBook: (id) => dispatch(actionCreators.deleteBook(id)),
+    editSelectedBook: (book) => dispatch(actionCreators.updateBook(book))
   };
 };
 
