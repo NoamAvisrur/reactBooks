@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as actionsTypes from '../../store/actions';
+
 import Book from '../Book/Book';
 import '../Book/Book.css';
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -10,6 +13,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showDescription: true,
       showDeleteModal: false,
       showEditModal: false,
       selectedBook: null
@@ -29,8 +33,27 @@ class Home extends Component {
   }
 
   deleteThisBook = () => {
-    this.props.deleteBook(this.state.selectedBook.id);
+    this.props.deleteSelectedBook(this.state.selectedBook.id);
     this.closeModal();
+  }
+
+  editBook = (id) => { //set with redux
+    const index = this.state.books.findIndex(book => book.id === id);
+    if(index !== -1){
+      const books = [...this.state.books];
+      books[index] = {id: 2, title: 'it', author: 'Harper Lee', date: '10.11.66'}
+      this.setState({books: books});
+    }
+  }
+
+  hideDescription = () => {
+    const descriptionShow = !this.state.showDescription;
+    this.setState({showDescription: descriptionShow});
+  }
+
+  cleanData = (value) => { //clean string data from characters and capitalize them
+    let newValue = (value).replace(/[^\w\s]/gi, '');
+    return newValue.charAt(0).toUpperCase() + newValue.substr(1).toLowerCase();
   }
 
   render() {
@@ -38,19 +61,19 @@ class Home extends Component {
       <div className="home-wrapper">
         <div className="books-wrapper">
           {this.props.books.map((book, i) => {
-            return <Book key={book.id}
+            return <Book key={i}
                          id = {book.id}
-                         title={this.props.cleanData(book.title)}
-                         author={this.props.cleanData(book.author)}
+                         title={this.cleanData(book.title)}
+                         author={this.cleanData(book.author)}
                          img={book.img}
                          date={book.date}
                          editBook={() => this.openEditModal(book)}
                          deleteBook={(book) => this.openDeleteModal(book)}/>
           })}
         </div>
-        {this.props.showDescription ?
+        {this.state.showDescription ?
           <HomeDescription>this is a very long description about this book store app</HomeDescription> : null}
-        <button onClick={this.props.hideDescription}>{this.props.showDescription ? 'Hide' : 'Show'}</button>
+        <button onClick={this.hideDescription}>{this.state.showDescription ? 'Hide' : 'Show'}</button>
         <DeleteModal show={this.state.showDeleteModal}
                      handleClose={() => this.closeModal()}
                      deleteBook={() => this.deleteThisBook()}/>
@@ -71,4 +94,16 @@ Home.propTypes = {
   editBook: PropTypes.func
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteSelectedBook: (id) => dispatch({type: actionsTypes.DELETE_BOOK, payload: id})
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    books: state.books
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

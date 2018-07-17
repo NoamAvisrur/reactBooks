@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const about = (props) => {
   return <div className="about-wrapper">
@@ -11,4 +12,12 @@ const about = (props) => {
 about.prototype = {
   about: PropTypes.string
 }
-export default about;
+
+const mapStateToProps = state => {
+  return {
+    about: state.about,
+    userName: state.userName
+  };
+};
+
+export default connect(mapStateToProps, null)(about);

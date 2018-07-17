@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import logo from '../../assets/logo.svg';
 
 const header = (props) => {
@@ -16,6 +17,7 @@ const header = (props) => {
                activeClassName="active-route">About</NavLink>
     </div>
     <div className="App-header-details">
+      <span>user: {props.userName}</span>
       <button className="header-button">add a book +</button>
       <div className="books-amount">{props.books.length} Books</div>
     </div>
@@ -26,4 +28,17 @@ header.propTypes = {
   books: PropTypes.array
 }
 
-export default header;
+const mapDispatchToProps = dispatch => {
+  return {
+    setBooks: (books) => dispatch({type: 'INIT_BOOKS', payload: books})
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    userName: state.userName,
+    books: state.books
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(header);
