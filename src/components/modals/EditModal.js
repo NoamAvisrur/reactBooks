@@ -4,7 +4,23 @@ import { Button, Modal } from 'react-bootstrap';
 class editModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      newTitle: '',
+      newAuthor: '',
+    }
+  }
+
+  handleTitleChange = (e) => {
+    this.setState({newTitle: e.target.value});
+  }
+
+  handleAuthorChange = (e) => {
+    this.setState({newAuthor: e.target.value});
+  }
+
+  handleEdit = () => {
+    this.props.editBook(this.state.newTitle, this.state.newAuthor);
+    this.setState({newTitle: '', newAuthor: ''});
   }
 
   render() {
@@ -20,17 +36,21 @@ class editModal extends Component {
           <Modal.Title>Edit "{this.props.selectedBook.title}" book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label style={labelStyle}>Title: <input type="text" defaultValue={this.props.selectedBook.title}/></label>
-          <label style={labelStyle}>Author: <input type="text" defaultValue={this.props.selectedBook.author}/></label>
+          <label style={labelStyle}>Title:
+            <input type="text" defaultValue={this.props.selectedBook.title}
+                   onChange={this.handleTitleChange}/>
+          </label>
+          <label style={labelStyle}>Author:
+            <input type="text" defaultValue={this.props.selectedBook.author}
+                   onChange={this.handleAuthorChange}/></label>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.deleteBook}>Edit</Button>
+          <Button onClick={this.handleEdit}>Edit</Button>
           <Button onClick={this.props.handleClose}>Cancel</Button>
         </Modal.Footer>
       </Modal> : null
     );
   }
-
 }
 
 export default editModal;

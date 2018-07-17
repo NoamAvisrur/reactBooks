@@ -25,7 +25,8 @@ const header = (props) => {
 }
 
 header.propTypes = {
-  books: PropTypes.array
+  books: PropTypes.array,
+  userName: PropTypes.string
 }
 
 const mapDispatchToProps = dispatch => {
@@ -36,8 +37,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    userName: state.userName,
-    books: state.books
+    userName: state.user.userName,
+    books: state.books.books
   };
 };
 

@@ -1,23 +1,11 @@
-import * as actionTypes from './actions';
+import * as actionTypes from '../actions';
 
 const initialState = {
   books: [],
-  about: 0,
-  userName: 'dan'
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.UPDATE_USER:
-      return {
-        ...state,
-        userName: action.payload
-      }
-    case actionTypes.INIT_ABOUT:
-      return{
-        ...state,
-        about: action.payload
-      }
     case actionTypes.INIT_BOOKS:
       return {
         ...state,
@@ -28,6 +16,14 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         books: newArr
+      }
+    case actionTypes.UPDATE_BOOK:
+      const i = state.books.findIndex(book => book.id === action.payload);
+      const Arr = [...state.books];
+      Arr[i] = {...action.payload}
+      return{
+        ...state,
+        books: Arr
       }
   }
   return state;

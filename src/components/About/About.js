@@ -15,8 +15,8 @@ about.prototype = {
 
 const mapStateToProps = state => {
   return {
-    about: state.about,
-    userName: state.userName
+    about: state.about.about,
+    userName: state.user.userName
   };
 };
 

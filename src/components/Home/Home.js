@@ -16,7 +16,7 @@ class Home extends Component {
       showDescription: true,
       showDeleteModal: false,
       showEditModal: false,
-      selectedBook: null
+      selectedBook: {}
     }
   }
 
@@ -37,13 +37,19 @@ class Home extends Component {
     this.closeModal();
   }
 
-  editBook = (id) => { //set with redux
-    const index = this.state.books.findIndex(book => book.id === id);
-    if(index !== -1){
-      const books = [...this.state.books];
-      books[index] = {id: 2, title: 'it', author: 'Harper Lee', date: '10.11.66'}
-      this.setState({books: books});
+  editThisBook = (newTitle, newAuthor) => {
+    if(newTitle.length > 0){
+      const newBook = this.state.selectedBook;
+      newBook.title = newTitle;
+      this.setState({selectedBook: newBook});
     }
+    if(newAuthor.length > 0){
+      const newBook = this.state.selectedBook;
+      newBook.author = newAuthor;
+      this.setState({selectedBook: newBook});
+    }
+    this.props.editSelectedBook(this.state.selectedBook);
+    this.closeModal();
   }
 
   hideDescription = () => {
@@ -80,7 +86,7 @@ class Home extends Component {
         <EditModal show={this.state.showEditModal}
                    selectedBook={this.state.selectedBook}
                    handleClose={() => this.closeModal()}
-                   deleteBook={() => this.deleteThisBook()}/>
+                   editBook={(newTitle, newAuthor) => this.editThisBook(newTitle, newAuthor)}/>
       </div>
     );
   }
@@ -88,21 +94,19 @@ class Home extends Component {
 
 Home.propTypes = {
   books: PropTypes.array,
-  showDescription: PropTypes.bool,
-  cleanData: PropTypes.func,
-  deleteBook: PropTypes.func,
-  editBook: PropTypes.func
+  deleteSelectedBook: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSelectedBook: (id) => dispatch({type: actionsTypes.DELETE_BOOK, payload: id})
+    deleteSelectedBook: (id) => dispatch({type: actionsTypes.DELETE_BOOK, payload: id}),
+    editSelectedBook: (book) => dispatch({type: actionsTypes.UPDATE_BOOK, payload: book})
   };
 };
 
 const mapStateToProps = state => {
   return {
-    books: state.books
+    books: state.books.books
   };
 };
 
