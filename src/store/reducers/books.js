@@ -6,7 +6,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.INIT_BOOKS:
+    case actionTypes.INIT_BOOKSֹ:
       return {
         ...state,
         books: action.payload

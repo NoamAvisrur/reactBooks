@@ -15,15 +15,9 @@ import './components/About/About.css'
 class App extends Component {
 
   componentDidMount(){
-    axios.get('./static/books.json') // get books list from api
-      .then(res => {
-        this.props.setBooks(res.data);
-      });
-    axios.get('./static/about.json') // get about text from api
-      .then(res => {
-        this.props.setAbout(res.data);
-      });
-    this.props.setUserName('david');
+    this.props.setAbout();
+    this.props.setBooks();
+    this.props.setUserName();
   }
 
   render() {
@@ -46,9 +40,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setBooks: (books) => dispatch(actionCreators.initBooks(books)),
-    setAbout: (about) => dispatch(actionCreators.initAbout(about)),
-    setUserName: (user) => dispatch(actionCreators.updateUser(user))
+    setBooks: () => dispatch(actionCreators.initBooks()),
+    setAbout: () => dispatch(actionCreators.initAbout()),
+    setUserName: () => dispatch(actionCreators.updateUser())
   };
 };
 

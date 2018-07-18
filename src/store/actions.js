@@ -1,42 +1,46 @@
-// actions
+// direct store actions
 export const UPDATE_USER = 'UPDATE_USER';
 export const INIT_ABOUT = 'INIT_ABOUT';
-export const INIT_BOOKS = 'INIT_BOOKS';
+export const INIT_BOOKSֹ = 'INIT_BOOKS';
 export const DELETE_BOOK = 'DELETE_BOOK';
 export const UPDATE_BOOK = 'UPDATE_BOOK';
 
+// saga effects actions
+export const RUN_INIT_BOOKS = 'RUN_INIT_BOOKS';
+export const RUN_INIT_ABOUT = 'RUN_INIT_ABOUT';
+export const RUN_UPDATE_USER = 'RUN_UPDATE_USER';
+export const RUN_DELETE_BOOK = 'RUN_DELETE_BOOK';
+export const RUN_UPDATE_BOOK = 'RUN_UPDATE_BOOK';
+
 // actions creators
-export const updateUser = (user) => {
+export const updateUser = () => {
   return {
-    type: UPDATE_USER,
-    payload: user
+    type: RUN_UPDATE_USER
   }
 }
 
-export const initAbout = (about) => {
+export const initAbout = () => {
   return {
-    type: INIT_ABOUT,
-    payload: about
+    type: RUN_INIT_ABOUT
   }
 }
 
-export const initBooks = (books) => {
+export const initBooks = () => {
   return {
-    type: INIT_BOOKS,
-    payload: books
+    type: RUN_INIT_BOOKS
   }
 }
 
 export const deleteBook = (id) => {
   return {
-    type: DELETE_BOOK,
+    type: RUN_DELETE_BOOK,
     payload: id
   }
 }
 
 export const updateBook = (book) => {
   return {
-    type: UPDATE_BOOK,
+    type: RUN_UPDATE_BOOK,
     payload: book
   }
 }

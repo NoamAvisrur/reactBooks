@@ -31,7 +31,6 @@ header.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setBooks: (books) => dispatch({type: 'INIT_BOOKS', payload: books})
   };
 };
 
