@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { delay } from 'redux-saga';
 import { put, call } from 'redux-saga/effects';
 import * as actionTypes from '../actions';
 
@@ -15,7 +16,6 @@ export function* initBooksEffect() {
 }
 
 export function* deleteBookEffect(action) { //DELETE a book effect and then invoke direct action to store
-  yield console.log(action.payload);
   yield put({
     type: actionTypes.DELETE_BOOK,
     payload: action.payload
@@ -23,9 +23,17 @@ export function* deleteBookEffect(action) { //DELETE a book effect and then invo
 }
 
 export function* updateBookEffect(action) { //EDIT a book effect and then invoke direct action to store
-  yield console.log(action.payload);
   yield put({
     type: actionTypes.UPDATE_BOOK,
+    payload: action.payload
+  });
+}
+
+export function* addBookEffect(action) { //EDIT a book effect and then invoke direct action to store
+  yield delay(1000);
+  yield console.log(action.payload);
+  yield put({
+    type: actionTypes.ADD_BOOK,
     payload: action.payload
   });
 }

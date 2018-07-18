@@ -25,6 +25,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         books: Arr
       }
+    case actionTypes.ADD_BOOK:
+      return{
+        ...state,
+        books: state.books.concat({...action.payload})
+      }
   }
   return state;
 }
