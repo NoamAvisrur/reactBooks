@@ -10,7 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 import BooksReducer from './store/reducers/books';
 import UserReducer from './store/reducers/user';
 import AboutReducer from './store/reducers/about';
-import { watchAuth } from './store/effects/index';
+import { watch } from './store/effects/index';
 
 const rootReducer = combineReducers({
   books: BooksReducer,
@@ -35,7 +35,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, sagaMiddleware)));
 
-sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watch);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
